@@ -39,16 +39,17 @@ ActiveRecord::Schema.define(version: 20140204085607) do
   end
 
   create_table "posts", force: true do |t|
+    t.string   "post_id"
     t.text     "message"
-    t.integer  "likes",      default: 0
-    t.string   "pic_url"
-    t.string   "from"
+    t.string   "picture"
+    t.datetime "updated_time"
     t.integer  "author_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "posts", ["author_id"], name: "index_posts_on_author_id", using: :btree
+  add_index "posts", ["id"], name: "index_posts_on_id", unique: true, using: :btree
 
   create_table "users", force: true do |t|
     t.datetime "created_at"
