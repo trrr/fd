@@ -2,6 +2,7 @@ class CreateAuthors < ActiveRecord::Migration
   def change
     create_table :authors do |t|
       t.string :profile
+      t.integer :category_id
 
       t.timestamps
     end
