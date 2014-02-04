@@ -12,6 +12,13 @@ gem 'sass-rails', '~> 4.0.0'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'pg'
 
+group :facebook do
+  gem 'koala'
+  gem 'resque-scheduler', :require => 'resque_scheduler'
+  gem 'resque', require: 'resque/server'
+end
+
+
 #Pagination with
 #https://github.com/amatsuda/kaminari
 
