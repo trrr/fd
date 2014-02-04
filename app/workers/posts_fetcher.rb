@@ -27,10 +27,18 @@ class PostsFetcher
     return post
   end
 
+  # TODO: That crap needs serious refactoring!
   def self.serialize_posts(raw_posts)
     posts = []
-    raw_posts.each {|raw_post| posts << extract_post_from_raw_post(raw_post)}
+    raw_posts.each do |raw_post| 
+      post = extract_post_from_raw_post(raw_post)
+      posts << post unless post[:message] == nil
+    end
     posts
+  end
+
+  def self.remove_empty_posts(posts)
+    posts.map{|post| posts.delete(post) if post.message == nil}
   end
 
   def self.remove_existing_posts(posts, author)
@@ -41,7 +49,7 @@ class PostsFetcher
   end
 
   def self.save_posts(posts, author)
-    posts.map {|post| author.posts << post}
+    posts.each {|post| author.posts << post}
   end
 
   def self.fb_api
