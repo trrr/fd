@@ -1,0 +1,4 @@
+fetcher_queue:
+  every: 1m
+  class: PostsFetcher
+  description: Fecth posts and save them to db
