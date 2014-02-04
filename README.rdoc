@@ -1,14 +1,7 @@
-== Basic rails scaffold
+== Simple facebook app
+
+Deploy:
+
+We're using resque so don't forget to install redis!
 
 
-* Rails 4.0.2
-
-* Devise 
-
-* Foundation
-
-* Haml
-
-* Rspec
-
-* Postgresql for production
