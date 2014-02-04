@@ -1,6 +1,12 @@
 class PostsFetcher
   @queue = :fetcher_queue
 
+  # ALERT! In current state this worker can run only as a single thread!
+  # In order for this to run asyncronisly you'll have to
+  # create another worker that will split authors by number of threads
+  # and pass groups of authors to this worker.
+  # And don't forget to reconfigure the resque scheduler!
+
   def self.perform
     Authors.all.each do |author|
       fetch_and_save_author_posts(author)
@@ -14,6 +20,9 @@ class PostsFetcher
     save_posts(posts, author)
   end
 
+  # TODO: It retuns some strange stuff along with the wall post
+  # need to figure out how to fix it 
+  # and remove empty message check from #serialize_posts
   def self.fetch_posts(author)
     fb_api.get_connections("#{author.profile}", 'posts')
   end
@@ -52,6 +61,8 @@ class PostsFetcher
     posts.each {|post| author.posts << post}
   end
 
+
+
   def self.fb_api
     # For test sake
     ENV['FACEBOOK_APP_ID'] = "1419909291585700"
@@ -60,4 +71,5 @@ class PostsFetcher
     @oauth = Koala::Facebook::OAuth.new(ENV['FACEBOOK_APP_ID'], ENV['FACEBOOK_APP_SECRET'])
     Koala::Facebook::API.new(@oauth.get_app_access_token)
   end
+
 end
