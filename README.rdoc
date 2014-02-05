@@ -9,7 +9,9 @@ Admin panel is available on /admin, resque panel on /resque
 ==== API:
 
 GET /tag to fetch all tags.
+
 GET /posts? to fetch posts. Accepts params:
+
 tag_id, page, per_page, action behavior
 
 Notice: Posts API doesn't understand action behavior yet.
@@ -17,8 +19,13 @@ Notice: Posts API doesn't understand action behavior yet.
 ===== What's has to be done:
 
 Add validations.
+
 Close admin and resque panels from the outside world.
+
 Configure resque scheduler.
+
 Thoroughly test (+stub the network, add edge cases) and refactor posts_fetcher.
+
 For "multithreading" add another worker what will run posts_fetcher.
+
 Remove before_save hook from authors.
