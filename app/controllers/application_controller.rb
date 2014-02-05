@@ -13,11 +13,21 @@ class ApplicationController < ActionController::Base
     categories_ids = params[:tag_id] || Category.all.map(&:id)
     page = params[:page] || 1
     per_page = params[:per_page] || 10
-    @posts = Post.where("category_id in (?)", categories_ids).page(page).per(per_page)
-
-    up_or_down = params['action']['behavior'] || 'up'
+    
+    # TODO: Refactor this ASAP!
+    if params['action']['behavior'] == 'down'
+      @posts = Post.where("category_id in (?)", categories_ids).where("updated_time < (?)", timepoint).page(page).per(per_page)
+    else
+      @posts = Post.where("category_id in (?)", categories_ids).where("updated_time > (?)", timepoint).page(page).per(per_page)
+    end
 
     render json: @posts
   end
 
+private
+
+  def timepoint
+    from_id = params['action']['id'] || Post.last.id
+    Post.find(from_id).updated_time
+  end
 end
