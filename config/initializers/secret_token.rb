@@ -24,4 +24,4 @@ def secure_token
   end
 end
 
-ReplaceIt::Application.config.secret_key_base = secure_token
+Fd::Application.config.secret_key_base = secure_token

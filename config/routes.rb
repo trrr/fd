@@ -1,6 +1,8 @@
-ReplaceIt::Application.routes.draw do
+Fd::Application.routes.draw do
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
   mount Resque::Server.new, :at => "/resque"
+
+  root to: redirect('/admin')
 
   get '/tags' => 'application#tags'
   get '/posts' => 'posts#index'
