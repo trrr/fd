@@ -6,6 +6,6 @@ class Author < ActiveRecord::Base
   private 
     def fetch_posts
       # Resque.enqueue(PostsFetcher, self.id)
-      PostsFetcher.fetch_and_save_author_posts(author)
+      PostsFetcher.fetch_and_save_author_posts(self)
     end
 end
