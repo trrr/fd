@@ -4,12 +4,12 @@ Fd::Application.routes.draw do
 
   root to: redirect('/admin')
 
-  get '/tags' => 'application#tags'
+  get '/tags' => 'categories#index'
   get '/posts' => 'posts#index'
 
   # Legacy API support.
   namespace :backend do
-    get '/mobile_api/posts' => 'application#tags'
+    get '/mobile_api/posts' => 'categories#index'
     get '/mobile_api/tags' => 'posts#index'
   end
 
