@@ -1,7 +1,7 @@
 class PostsFetcher
   @queue = :fetcher_queue
 
-  # ALERT! In current state this worker can run only as a single thread!
+  # ALERT! In the current state this worker can run only as a single thread!
   # In order for this to run asyncronisly you'll have to
   # create another worker that will split authors by number of threads
   # and pass groups of authors to this worker.
@@ -15,14 +15,10 @@ class PostsFetcher
 
   def self.fetch_and_save_author_posts(author)
     raw_posts = fetch_posts(author)
-    serialized_posts = serialize_posts(raw_posts)
-    posts = remove_existing_posts(serialized_posts, author)
-    save_posts(posts, author)
+    posts = serialize_posts(raw_posts)
+    check_for_dublications_and_save_posts(posts, author)
   end
 
-  # TODO: It retuns some strange stuff along with the wall post
-  # need to figure out how to fix it 
-  # and remove empty message check from #serialize_posts
   def self.fetch_posts(author)
     fb_api.get_connections("#{author.profile}", 'posts')
   end
@@ -46,21 +42,13 @@ class PostsFetcher
     posts
   end
 
-  def self.remove_empty_posts(posts)
-    posts.map{|post| posts.delete(post) if post.message == nil}
-  end
 
-  def self.remove_existing_posts(posts, author)
+  def self.check_for_dublications_and_save_posts(posts, author)
     existing_posts = author.posts.map(&:post_id)
     posts.each do |post|
-      posts.delete(post) if existing_posts.include?(post.post_id)
+      author.posts << post unless existing_posts.include?(post.post_id)
     end
   end
-
-  def self.save_posts(posts, author)
-    posts.each {|post| author.posts << post}
-  end
-
 
 
   def self.fb_api
