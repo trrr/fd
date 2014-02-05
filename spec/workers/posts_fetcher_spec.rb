@@ -5,17 +5,11 @@ require 'koala'
 describe PostsFetcher do
   let(:token) {Koala::Facebook::OAuth.new("1419909291585700", "ff5c45bb0c190064ba21b3b9480beb14")}
   let(:fb_api) {Koala::Facebook::API.new(token.get_app_access_token)}
-  # let(:data) {File.read("spec/sample.json")}
   let(:data) {fb_api.get_connections("nokia", 'posts')}
   let (:raw_post) {JSON.parse(File.read("spec/workers/post.json"))}
   let(:posts) {PostsFetcher.serialize_posts(data)}
   let(:author) {Author.create(profile: "nokia")}
 
-  it "blah" do
-    somefile = File.open("spec/sample.json", "w")
-    somefile.puts data
-    somefile.close
-  end
 
   it "works" do
     pending "Stub the network!"
@@ -24,9 +18,6 @@ describe PostsFetcher do
 
   it "serializes posts" do 
     serialized_data = PostsFetcher.serialize_posts(data)
-    somefile = File.open("spec/serialized_posts.json", "w")
-    somefile.puts serialized_data
-    somefile.close
     expect(serialized_data.class).to be Array
     expect(serialized_data.count).to be > 0
   end
@@ -38,28 +29,21 @@ describe PostsFetcher do
   end
 
   it "fetchs posts" do
-    PostsFetcher.fetch_posts(author)
+    expect{PostsFetcher.fetch_posts(author)}.not_to be_nil
   end
 
-  it "saves posts" do
-    PostsFetcher.save_posts(posts, author)
-    expect(author.posts.length).to eq posts.length
-  end
+  context "integration tests" do
 
-  it "removes existing posts" do
-    PostsFetcher.remove_existing_posts(posts, author)
-  end
+    it "fetchs and saves posts for given author" do
+      PostsFetcher.fetch_and_save_author_posts(author)
+      expect(author.posts.count).to be > 5
+    end
 
-  it "doesn't save duplicate posts" do
-    PostsFetcher.fetch_and_save_author_posts(author)
-    a = author.posts.count
-    PostsFetcher.fetch_and_save_author_posts(author)
-    expect(author.posts.count).to eq a
+    it "doesn't save duplicate posts" do
+      PostsFetcher.fetch_and_save_author_posts(author)
+      a = author.posts.count
+      PostsFetcher.fetch_and_save_author_posts(author)
+      expect(author.posts.count).to eq a
+    end
   end
-
-  it "worker integration test tests" do
-    PostsFetcher.fetch_and_save_author_posts(author)
-    expect(author.posts.count).to be > 5
-  end
-
 end
