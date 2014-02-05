@@ -35,7 +35,3 @@ Close admin and resque panels from the outside world.
 Configure resque scheduler.
 
 Thoroughly test (+stub the network, add edge cases) and refactor posts_fetcher.
-
-For "multithreading" add another worker what will run posts_fetcher.
-
-Remove before_save hook from authors.
