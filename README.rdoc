@@ -1,21 +1,22 @@
 == Simple facebook app
 
-Deploy:
+==== Deploy:
 
 We're using resque so don't forget to install redis!
 
 Admin panel is available on /admin, resque panel on /resque
 
-API:
+==== API:
 
 GET /tag to fetch all tags.
 GET /posts? to fetch posts. Accepts params:
 tag_id, page, per_page, action behavior
 
-Notice: Posts API is not yet implemented.
+Notice: Posts API doesn't understand action behavior yet.
 
-What's has to be done:
+===== What's has to be done:
 
+Add validations.
 Close admin and resque panels from the outside world.
 Configure resque scheduler.
 Thoroughly test (+stub the network, add edge cases) and refactor posts_fetcher.
