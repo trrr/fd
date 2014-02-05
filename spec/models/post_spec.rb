@@ -1,9 +1,7 @@
 require 'spec_helper'
 
 describe Post do
-  it {should belong_to(:author) }
-  it {Post.should order('updated_time DESC') }
-
+  it {should belong_to(:author) }  
   let(:category) {Category.create(name: "Tech")}
   let(:author) {Author.create(profile: "nokia", category_id: 1)}
   let(:post) {Post.new(message: "Message", updated_time: "2014-02-05 07:08:02", post_id: "12312312")}
