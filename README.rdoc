@@ -4,6 +4,10 @@
 
 We're using resque so don't forget to install redis!
 
+rails s
+rake resque:work QUEUE="*"
+rake resque:scheduler
+
 Admin panel is available on /admin, resque panel on /resque
 
 ==== API:
@@ -12,9 +16,15 @@ GET /tag to fetch all tags.
 
 GET /posts? to fetch posts. Accepts params:
 
-tag_id, page, per_page, action behavior
+tag_id, page, per_page, action behavior, action id
 
-Notice: Posts API doesn't understand action behavior yet.
+Notice: API is also available on legasy url's 
+
+
+    get '/mobile_api/posts', 
+    get '/mobile_api/tags'
+
+Although some values chenged.
 
 ===== What's has to be done:
 
