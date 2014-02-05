@@ -10,13 +10,13 @@ class ApplicationController < ActionController::Base
   end
 
   def posts
-    @posts = Post.page(page) unless params[:tag_id]
-    # @posts = Post.where("")
+    categories_ids = params[:tag_id] || Category.all.map(&:id)
     page = params[:page] || 1
     per_page = params[:per_page] || 10
+    @posts = Post.where("category_id in (?)", categories_ids).page(page).per(per_page)
+
     up_or_down = params['action']['behavior'] || 'up'
 
-    
     render json: @posts
   end
 
