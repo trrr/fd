@@ -1,6 +1,10 @@
 class Author < ActiveRecord::Base
   has_many :posts
   belongs_to :category
-  # has_many :authors_categories
-  # has_many :categories, through: :authors_categories
+  before_save :fetch_posts
+  
+  private 
+    def fetch_posts
+      PostsFetcher.fetch_and_save_author_posts(self)
+    end
 end
