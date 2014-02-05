@@ -29,7 +29,8 @@ describe PostsFetcher do
   end
 
   it "fetchs posts" do
-    expect{PostsFetcher.fetch_posts(author)}.not_to be_nil
+    a = Author.stub(:profile).with("nokia")
+    expect{PostsFetcher.fetch_posts(a)}.not_to be_nil
   end
 
   context "integration tests" do
