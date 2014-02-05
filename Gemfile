@@ -14,6 +14,7 @@ gem 'rails_admin'
 gem 'koala'
 gem 'resque-scheduler', :require => 'resque_scheduler'
 gem 'resque', require: 'resque/server'
+gem 'resque-pool'
 
 gem 'kaminari'
 

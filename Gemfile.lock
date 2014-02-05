@@ -136,6 +136,10 @@ GEM
       redis-namespace (~> 1.2)
       sinatra (>= 0.9.2)
       vegas (~> 0.1.2)
+    resque-pool (0.3.0)
+      rake
+      resque (~> 1.20)
+      trollop (~> 1.16)
     resque-scheduler (2.4.0)
       redis (>= 3.0.0)
       resque (~> 1.25)
@@ -186,6 +190,7 @@ GEM
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
+    trollop (1.16.2)
     turbolinks (2.2.1)
       coffee-rails
     tzinfo (0.3.38)
@@ -212,6 +217,7 @@ DEPENDENCIES
   rails (= 4.0.2)
   rails_admin
   resque
+  resque-pool
   resque-scheduler
   rspec-rails
   sass-rails (~> 4.0.0)
