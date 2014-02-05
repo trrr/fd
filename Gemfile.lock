@@ -206,6 +206,7 @@ DEPENDENCIES
   haml-rails
   jbuilder (~> 1.2)
   jquery-rails
+  kaminari
   koala
   pg
   rails (= 4.0.2)

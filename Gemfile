@@ -15,6 +15,7 @@ gem 'koala'
 gem 'resque-scheduler', :require => 'resque_scheduler'
 gem 'resque', require: 'resque/server'
 
+gem 'kaminari'
 
 #Pagination with
 #https://github.com/amatsuda/kaminari
