@@ -1,4 +1,4 @@
 fetcher_queue:
-  every: 1m
-  class: PostsFetcher
+  every: 15m
+  class: PostsFetcherScheduler
   description: Fecth posts and save them to db

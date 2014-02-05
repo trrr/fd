@@ -1,16 +1,9 @@
 class PostsFetcher
   @queue = :fetcher_queue
 
-  # ALERT! In the current state this worker can run only as a single thread!
-  # In order for this to run asyncronisly you'll have to
-  # create another worker that will split authors by number of threads
-  # and pass groups of authors to this worker.
-  # And don't forget to reconfigure the resque scheduler!
-
-  def self.perform
-    Authors.all.each do |author|
-      fetch_and_save_author_posts(author)
-    end
+  def self.perform(id)
+    author = Author.find(id)
+    fetch_and_save_author_posts(author)
   end
 
   def self.fetch_and_save_author_posts(author)
