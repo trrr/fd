@@ -17,9 +17,6 @@ gem 'resque', require: 'resque/server'
 
 gem 'kaminari'
 
-#Pagination with
-#https://github.com/amatsuda/kaminari
-
 group :production do
   gem 'uglifier', '>= 1.3.0'
 end
