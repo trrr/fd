@@ -1,5 +1,5 @@
 class Author < ActiveRecord::Base
-  has_many :posts
+  has_many :posts, dependent: :destroy
   belongs_to :category
   before_save :fetch_posts
   
