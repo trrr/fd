@@ -23,14 +23,6 @@ class PostsFetcher
     fb_api.get_connections("#{author.profile}", 'posts')
   end
 
-  def self.extract_post_from_raw_post(data)
-    post = Post.new
-    post.post_id = data['id'].to_s
-    post.message = data['message']
-    post.updated_time = data['updated_time']
-    post.picture = data['picture']
-    return post
-  end
 
   # TODO: That crap needs serious refactoring!
   def self.serialize_posts(raw_posts)
@@ -42,6 +34,14 @@ class PostsFetcher
     posts
   end
 
+  def self.extract_post_from_raw_post(data)
+    post = Post.new
+    post.post_id = data['id'].to_s
+    post.message = data['message']
+    post.updated_time = data['updated_time']
+    post.picture = data['picture']
+    return post
+  end
 
   def self.check_for_dublications_and_save_posts(posts, author)
     existing_posts = author.posts.map(&:post_id)
