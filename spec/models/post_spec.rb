@@ -16,9 +16,16 @@ describe Post do
   end
 
   it "order by updated_time DESC" do
-    pending "it's failing because of before_save hook in author"
     p = [post1, post3, post]
     p.each {|post| author.posts << post}
     expect(Post.all.map(&:post_id)).to eq p.map(&:post_id)
+  end
+
+  it "gives previous posts" do
+    pending "TODO"
+  end
+
+  it "gives next posts" do
+    pending "TODO"
   end
 end
