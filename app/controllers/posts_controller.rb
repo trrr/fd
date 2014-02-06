@@ -8,12 +8,12 @@ class PostsController < ApplicationController
   private
 
     def timepoint
-      given_id = params['id'] || Post.last.id
+      given_id = params[:action][:id] || Post.last.id
       Post.find(given_id).updated_time
     end
 
     def up_or_down
-      params['behavior'] == 'down' ? '<' : '>'
+      params[:action][:behavior] == 'down' ? '<' : '>'
     end
 
     def categories_ids
