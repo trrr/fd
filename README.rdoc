@@ -4,6 +4,8 @@
 
 We're using resque so don't forget to install redis!
 
+To run it on a local machine, bundle, create db, run migrations and then run:
+
     rails s
     rake resque:work QUEUE="*"
     rake resque:scheduler
@@ -15,9 +17,10 @@ Admin panel is available on /admin, resque panel on /resque
 Available on
     
     get '/tags' 
+    get '/authors'
     get '/posts'
 
-Accepted params:
+Posts accepted params:
     tag_id
     page
     per_page
