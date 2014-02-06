@@ -6,6 +6,7 @@ Fd::Application.routes.draw do
 
   get '/tags' => 'categories#index'
   get '/posts' => 'posts#index'
+  get '/authors' => 'authors#index'
 
   # Legacy API support.
   namespace :backend do
