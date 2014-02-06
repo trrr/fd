@@ -4,13 +4,8 @@ class Post < ActiveRecord::Base
   belongs_to :author
 
 
-# TODO: Have to dry it up!!
-  def self.get_previous(categories_ids, page, per_page, time)
-    Post.where("category_id in (?)", categories_ids).where("updated_time < (?)", time).page(page).per(per_page)
-  end
-
-  def self.get_next(categories_ids, page, per_page, time)
-    Post.where("category_id in (?)", categories_ids).where("updated_time > (?)", time).page(page).per(per_page)
+  def self.get_posts_by_params(categories_ids, page = 1, per_page = 10, time, more_or_less)
+    Post.where("category_id in (?)", categories_ids).where("updated_time #{more_or_less} (?)", time).page(page).per(per_page)
   end
 
   private
