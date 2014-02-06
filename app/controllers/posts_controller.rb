@@ -21,7 +21,6 @@ class PostsController < ApplicationController
                     end
 
     # sending posts to user
-    render json: @posts.select!('id', 'message', 'picture', 'updated_time', 'category_id', 'author_id')
+    render json: @posts.as_json(only: [:id, :message, :picture, :updated_time, :category_id, :author_id])
   end
-
 end
