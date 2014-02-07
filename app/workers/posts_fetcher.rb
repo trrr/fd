@@ -16,8 +16,6 @@ class PostsFetcher
     fb_api.get_connections("#{author.profile}", 'posts')
   end
 
-
-  # TODO: That crap needs serious refactoring!
   def self.serialize_posts(raw_posts)
     posts = []
     raw_posts.each do |raw_post| 
