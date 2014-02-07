@@ -19,6 +19,6 @@ class PostsController < ApplicationController
     end
 
     def categories_ids
-      params[:tag_id] || Category.all.map(&:id)
+      params[:tag_id] || Category.pluck(:id)
     end
 end

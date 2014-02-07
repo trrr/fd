@@ -35,7 +35,7 @@ class PostsFetcher
   end
 
   def self.check_for_dublications_and_save_posts(posts, author)
-    existing_posts = author.posts.map(&:post_id)
+    existing_posts = author.posts.pluck(:post_id)
     posts.each do |post|
       author.posts << post unless existing_posts.include?(post.post_id)
     end
