@@ -5,6 +5,7 @@ describe PostsFetcher do
   let(:data) {JSON.parse(File.read("spec/response.json"))}
   let(:posts) {PostsFetcher.serialize_posts(data)}
   let(:author) {Author.create(profile: "nokia")}
+  let(:amount_of_posts) {18}
 
   it "works" do
     pending "If some test fail, it's probably because of shitty heroku fix. Just turn off author ater_save"
@@ -25,11 +26,11 @@ describe PostsFetcher do
     let(:serialized_data) {PostsFetcher.serialize_posts(data)}
 
     it "serializes posts (extracts data what we need)" do 
-      expect(serialized_data.count).to eq 18
+      expect(serialized_data.count).to eq amount_of_posts
     end
 
     it "drops posts with empty messages" do 
-      expect(serialized_data.map(&:message).compact.count).to eq 18
+      expect(serialized_data.map(&:message).compact.count).to eq amount_of_posts
     end
   end
 
@@ -61,12 +62,12 @@ describe PostsFetcher do
     before {PostsFetcher.check_for_dublications_and_save_posts(posts, author)}
 
     it "saves all posts to the db" do
-      expect(author.posts.count).to eq 18
+      expect(author.posts.count).to eq amount_of_posts
     end
 
     it "doesn't save posts twice" do
       PostsFetcher.check_for_dublications_and_save_posts(posts, author)
-      expect(author.posts.count).to eq 18
+      expect(author.posts.count).to eq amount_of_posts
     end
   end
 
