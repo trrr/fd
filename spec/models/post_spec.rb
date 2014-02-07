@@ -52,11 +52,15 @@ describe Post do
     end
 
     context "retrieving next/previous posts from post" do
-      it "gives previous posts" do
+      let(:second_page) {Post.get_posts_by_params(categories_ids, 2, per_page, timepoint, up_or_down).map(&:post_id)}
+      let(:first_page) {Post.get_posts_by_params(categories_ids, 1, per_page, timepoint, up_or_down).map(&:post_id)}
+
+      it "gives previous ten posts" do
+        expect(Post.get_posts_by_params(categories_ids, page, per_page, "2014-02-06 19:22:53", '<').map(&:post_id)).to eq second_page
       end
 
-      it "gives next posts" do
-        pending "TODO"
+      it "gives next ten posts" do
+        expect(Post.get_posts_by_params(categories_ids, page, per_page, "2014-02-04 11:35:29", '>').map(&:post_id)).to eq first_page
       end
     end
   end
