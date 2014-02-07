@@ -45,10 +45,6 @@ class PostsFetcher
 
 
   def self.fb_api
-    # For test sake
-    ENV['FACEBOOK_APP_ID'] = "1419909291585700"
-    ENV['FACEBOOK_APP_SECRET'] = "ff5c45bb0c190064ba21b3b9480beb14"
-
     @oauth = Koala::Facebook::OAuth.new(ENV['FACEBOOK_APP_ID'], ENV['FACEBOOK_APP_SECRET'])
     Koala::Facebook::API.new(@oauth.get_app_access_token)
   end
