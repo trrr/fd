@@ -12,6 +12,5 @@ class CreatePosts < ActiveRecord::Migration
     end
     add_index :posts, :author_id
     add_index :posts, :category_id
-    add_index :posts, :post_id, unique: true
   end
 end
