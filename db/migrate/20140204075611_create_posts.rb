@@ -6,10 +6,12 @@ class CreatePosts < ActiveRecord::Migration
       t.string :picture
       t.datetime :updated_time
       t.integer :author_id
+      t.integer :category_id
 
       t.timestamps
     end
     add_index :posts, :author_id
-    add_index :posts, :id, unique: true
+    add_index :posts, :category_id
+    add_index :posts, :post_id, unique: true
   end
 end

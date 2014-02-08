@@ -7,5 +7,6 @@ class CreateAuthors < ActiveRecord::Migration
       t.timestamps
     end
     add_index :authors, :profile, :unique => true
+    add_index :authors, :category_id
   end
 end
