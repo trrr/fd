@@ -2,8 +2,7 @@ class PostsFetcher
   @queue = :fetcher_queue
 
   def self.perform(id)
-    author = Author.find(id)
-    fetch_and_save_author_posts(author)
+    fetch_and_save_author_posts(Author.find(id))
   end
 
   def self.fetch_and_save_author_posts(author)
@@ -26,12 +25,12 @@ class PostsFetcher
   end
 
   def self.extract_post_from_raw_post(data)
-    post = Post.new
-    post.post_id = data['id'].to_s
-    post.message = data['message']
-    post.updated_time = data['updated_time']
-    post.picture = data['picture']
-    return post
+    Post.new do |p|
+      p.post_id = data['id'].to_s
+      p.message = data['message']
+      p.updated_time = data['updated_time']
+      p.picture = data['picture']
+    end
   end
 
   def self.check_for_dublications_and_save_posts(posts, author)
