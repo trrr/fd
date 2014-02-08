@@ -19,8 +19,8 @@ describe Post do
   end
 
   it "orders by updated_time DESC" do
-    expect(Post.first.post_id).to eq "36922302396_10151862237292397"
-    expect(Post.last.post_id).to eq "36922302396_10151852873192397"
+    expect(Post.pluck(:post_id).first).to eq "36922302396_10151862237292397"
+    expect(Post.pluck(:post_id).last).to eq "36922302396_10151852873192397"
   end
 
   context "retrieving posts" do
