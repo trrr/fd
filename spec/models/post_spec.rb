@@ -4,14 +4,17 @@ describe Post do
   it {should belong_to(:author) }  
 
   let(:category) {Category.create(name: "Tech")}
-  let(:author) {Author.create(profile: "nokia", category_id: 1)}
+  let(:author) {Author.new(profile: "nokia")}
 
   let(:data) {JSON.parse(File.read("spec/response.json"))}
   let(:posts) {PostsFetcher.serialize_posts(data)}
-  before {PostsFetcher.check_for_dublications_and_save_posts(posts, author)}
+  before do 
+    category.authors << author
+    PostsFetcher.check_for_dublications_and_save_posts(posts, author)
+  end
 
   it "works" do
-    pending "clean up and use fixtures!"
+    pending "clean up and use factories!"
   end
 
   it "sets category id" do
@@ -26,12 +29,12 @@ describe Post do
   context "retrieving posts" do
     let(:timepoint) {"2000-01-01T00:00:00.000Z"}
     let(:up_or_down) {'>'}
-    let(:categories_ids) {1}
+    let(:categories_ids) {Category.ids}
     let(:page) {1}
     let(:per_page) {10}
  
     it "returns given amount of posts" do
-      expect(Post.get_posts_by_params(categories_ids, page, 5, timepoint, up_or_down).count).to eq 5
+      expect(Post.get_posts_by_params(categories_ids, page, 10, timepoint, up_or_down).count).to eq 10
     end
 
     it "returns posts by category" do

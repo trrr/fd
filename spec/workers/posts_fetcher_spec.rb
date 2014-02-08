@@ -3,9 +3,16 @@ require 'json'
 
 describe PostsFetcher do
   let(:data) {JSON.parse(File.read("spec/response.json"))}
+  let(:category) {Category.create(name: "Tech")}
   let(:posts) {PostsFetcher.serialize_posts(data)}
-  let(:author) {Author.create(profile: "nokia")}
+  let(:author) {Author.new(profile: "nokia")}
   let(:amount_of_posts) {18}
+  before {category.authors << author}
+
+
+  it "" do
+    pending "TODO: clean up and use factories!"
+  end
 
   context "fetching posts from facebook (hitting the network here!)" do
 

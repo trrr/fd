@@ -5,7 +5,7 @@ class Post < ActiveRecord::Base
   scope :posted_at, ->(before_or_after, time) {where("updated_time #{before_or_after} (?)", time)}
   before_save :set_category
   belongs_to :author
-
+  validates :author, :message, :updated_time, presence: true
 
   def self.get_posts_by_params(categories_ids, page = 1, per_page = 10, time, before_or_after)
     Post.api_data.category_in(categories_ids).posted_at(before_or_after, time).page(page).per(per_page)
