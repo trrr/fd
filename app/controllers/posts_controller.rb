@@ -5,7 +5,7 @@ class PostsController < ApplicationController
 
   def index
     @posts = Post.get_posts_by_params(categories_ids, params[:page], params[:per_page], timepoint, up_or_down)
-    render json: @posts.as_json(only: [:id, :message, :picture, :updated_time, :category_id, :author_id])
+    render json: @posts
   end
 
   private
