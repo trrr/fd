@@ -7,21 +7,17 @@ describe PostsFetcher do
   let(:author) {Author.create(profile: "nokia")}
   let(:amount_of_posts) {18}
 
-  it "works" do
-    pending "If some test fail, it's probably because of shitty heroku fix. Just turn off author ater_save"
-  end
-
   context "fetching posts from facebook (hitting the network here!)" do
 
     before {Author.any_instance.stub(:profile).and_return('nokia')}
 
-    it "fetchs posts of given author from facebook" do
+    it "fetches posts of given author from facebook" do
       pending "uncomment when needed (you'll have to have the right facebook tokens)"
       # expect(PostsFetcher.fetch_posts(Author.new).count).to be > 5
     end
   end
 
-  context "serializing data and droping posts with empty messages" do
+  context "serializing data and dropping posts with empty messages" do
 
     let(:serialized_data) {PostsFetcher.serialize_posts(data)}
 
@@ -72,7 +68,7 @@ describe PostsFetcher do
   end
 
   context "integration tests (Hitting the network!)" do
-    it "fetchs and saves posts for given author" do
+    it "fetches and saves posts for given author" do
       pending "uncomment it when needed"
       # PostsFetcher.fetch_and_save_author_posts(author)
       # expect(author.posts.count).to be > 5

@@ -27,12 +27,12 @@ Posts accepted params:
     action behavior
     action id
 
-Notice: API is also available on legasy url's 
+Notice: API is also available on legacy url's 
 
     get '/mobile_api/tags'
     get '/mobile_api/posts'
 
-Although some values chenged.
+Although some values changed.
 
 ===== What's has to be done:
 
