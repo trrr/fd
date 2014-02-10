@@ -16,12 +16,9 @@ class PostsFetcher
   end
 
   def self.serialize_posts(raw_posts)
-    posts = []
-    raw_posts.each do |raw_post| 
-      post = extract_post_from_raw_post(raw_post)
-      posts << post unless post[:message] == nil
+    raw_posts.reject {|post| post["message"] == nil}.map do |raw_post|
+      extract_post_from_raw_post(raw_post)
     end
-    posts
   end
 
   def self.extract_post_from_raw_post(data)
