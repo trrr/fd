@@ -1,5 +1,21 @@
 == Simple facebook app
 
+Back-end for a mobile facebook feeds applications. 
+
+== Example
+
+You can add new categories and authors using app admin:
+
+http://facebook-feeds.herokuapp.com/admin
+
+And then access author's posts on:
+
+http://facebook-feeds.herokuapp.com/posts
+
+get posts only from a certain category, limit mount of posts, etc:
+
+http://facebook-feeds.herokuapp.com/posts?tag_id=2&per_page=3&page=2
+
 ==== Deploy:
 
 We're using resque so don't forget to install redis!
@@ -20,7 +36,7 @@ Available on
     get '/authors'
     get '/posts'
 
-Posts accepted params:
+Posts API accepted parameters:
     tag_id
     page
     per_page
@@ -36,12 +52,6 @@ Although some values changed.
 
 ===== What's has to be done:
 
-Add validations.
-
 Close admin and resque panels from the outside world.
 
-Rewrite API handling, right now it's pretty ugly.
-
-Cover API with test.
-
-Thoroughly test (+stub the network, add edge cases) and refactor posts_fetcher.
+Rewrite API handling, right now it's a little ugly and inefficient.
