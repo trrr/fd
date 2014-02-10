@@ -31,7 +31,7 @@ class PostsFetcher
   end
 
   def self.check_for_dublications_and_save_posts(posts, author)
-    author.posts = (author.posts + posts).uniq
+    author.posts = (author.posts + posts).uniq {|post| post.post_id}
   end
 
 

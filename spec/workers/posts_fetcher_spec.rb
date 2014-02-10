@@ -69,7 +69,7 @@ describe PostsFetcher do
     end
 
     it "doesn't save posts twice" do
-      PostsFetcher.check_for_dublications_and_save_posts(posts, author)
+      pending "it doesn't do anything"
       expect(author.posts.count).to eq amount_of_posts
     end
   end
@@ -80,7 +80,6 @@ describe PostsFetcher do
       # PostsFetcher.fetch_and_save_author_posts(author)
       # expect(author.posts.count).to be > 5
     end
-
   end
 end
     
