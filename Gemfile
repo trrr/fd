@@ -16,8 +16,6 @@ gem 'resque-scheduler', :require => 'resque_scheduler'
 gem 'resque', require: 'resque/server'
 gem 'resque-pool'
 
-gem 'kaminari'
-
 group :production do
   gem 'uglifier', '>= 1.3.0'
   gem 'rails_12factor'
@@ -29,7 +27,6 @@ end
 
 group :test, :development do
   gem 'rspec-rails'
-  gem 'sqlite3'
-  gem 'capybara'
   gem 'shoulda-matchers'
+  gem "factory_girl_rails", "~> 4.0"
 end
