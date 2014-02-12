@@ -2,27 +2,12 @@ require 'spec_helper'
 require 'json'
 
 describe PostsFetcher do
+  let(:category) {create :category}
+  let(:author) {create :author}
   let(:data) {JSON.parse(File.read("spec/response.json"))}
-  let(:category) {Category.create(name: "Tech")}
   let(:posts) {PostsFetcher.serialize_posts(data)}
-  let(:author) {Author.new(profile: "nokia")}
   let(:amount_of_posts) {18}
   before {category.authors << author}
-
-
-  it "" do
-    pending "TODO: clean up and use factories!"
-  end
-
-  context "fetching posts from facebook (hitting the network here!)" do
-
-    before {Author.any_instance.stub(:profile).and_return('nokia')}
-
-    it "fetches posts of given author from facebook" do
-      pending "uncomment when needed (you'll have to have the right facebook tokens)"
-      # expect(PostsFetcher.fetch_posts(Author.new).count).to be > 5
-    end
-  end
 
   context "serializing data and dropping posts with empty messages" do
 
@@ -63,25 +48,25 @@ describe PostsFetcher do
 
   context "saving new posts to the database" do
     before {PostsFetcher.check_for_dublications_and_save_posts(posts, author)}
+    let(:post) {build :post, author: author}
 
     it "saves all posts to the db" do
       expect(author.posts.count).to eq amount_of_posts
     end
 
     it "doesn't save posts twice" do
-      pending "it doesn't do anything"
-      expect(author.posts.count).to eq amount_of_posts
+      posts << post
+      PostsFetcher.check_for_dublications_and_save_posts(posts, author)
+      expect(author.posts.count).to eq amount_of_posts+1
     end
+
   end
 
   context "integration tests (Hitting the network!)" do
-    it "fetches and saves posts for given author" do
+    it "fetches posts for a given author from facebook and saves them to the db" do
       pending "uncomment it when needed"
       # PostsFetcher.fetch_and_save_author_posts(author)
-      # expect(author.posts.count).to be > 5
+      # expect(author.posts.count).to be > 10
     end
   end
 end
-    
-
-#To save response do: File.open('spec/response.json', 'w'){ |f| f << data.to_json }
