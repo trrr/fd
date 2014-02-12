@@ -7,7 +7,7 @@ class PostsController < ApplicationController
       up_or_down = params['behavior'] == 'down' ? '<' : '>'     
     end
 
-    @posts = Post.get_posts_by_params(params[:tag_id], params[:per_page], timepoint, up_or_down)
+    @posts = Post.get_posts_by_params(params[:categories_ids], params[:per_page], timepoint, up_or_down)
     render json: @posts
   end
 end

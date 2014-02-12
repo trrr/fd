@@ -4,7 +4,7 @@ Fd::Application.routes.draw do
 
   root to: redirect('/admin')
 
-  get '/tags' => 'categories#index'
+  get '/categories' => 'categories#index'
   get '/posts' => 'posts#index'
   get '/authors' => 'authors#index'
 

@@ -4,17 +4,22 @@ Back-end for a mobile facebook feeds applications.
 
 == Example
 
-You can add new categories and authors using app admin:
+You can add new categories and authors using application admin interface:
 
 http://facebook-feeds.herokuapp.com/admin
 
-And then access author's posts on:
+And then access added author's facebook posts on:
 
 http://facebook-feeds.herokuapp.com/posts
 
-get posts only from a certain category, limit mount of posts, etc:
+To get posts only from a certain category, limit amount of posts, etc, use arguments:
 
-http://facebook-feeds.herokuapp.com/posts?tag_id=2&per_page=3
+http://facebook-feeds.herokuapp.com/posts?categories_ids=2&per_page=3
+
+To get 20 posts what were published before post with id 123 in categories with id's 3 and 5:
+
+http://facebook-feeds.herokuapp.com/posts?categories_ids=3,5&per_page=20&id=123&behavior=down
+
 
 ==== Deploy:
 
@@ -32,25 +37,12 @@ Admin panel is available on /admin, resque panel on /resque
 
 Available on
     
-    get '/tags' 
+    get '/categories' 
     get '/authors'
     get '/posts'
 
 Posts API accepted parameters:
-    tag_id
-    per_page
-    action behavior
-    action id
-
-Notice: API is also available on legacy url's 
-
-    get '/mobile_api/tags'
-    get '/mobile_api/posts'
-
-Although some values changed.
-
-===== What's has to be done:
-
-Close admin and resque panels from the outside world.
-
-Rewrite API handling, right now it's a little ugly and inefficient.
+    categories_ids 
+    per_page 
+    id  
+    behavior # accepted arguments: 'up' or 'down'
