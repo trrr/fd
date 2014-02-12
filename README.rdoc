@@ -14,7 +14,7 @@ http://facebook-feeds.herokuapp.com/posts
 
 get posts only from a certain category, limit mount of posts, etc:
 
-http://facebook-feeds.herokuapp.com/posts?tag_id=2&per_page=3&page=2
+http://facebook-feeds.herokuapp.com/posts?tag_id=2&per_page=3
 
 ==== Deploy:
 
@@ -38,7 +38,6 @@ Available on
 
 Posts API accepted parameters:
     tag_id
-    page
     per_page
     action behavior
     action id
