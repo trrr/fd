@@ -1,8 +1,8 @@
 class AuthorsController < ApplicationController
 
   def index
-    @authors = Author.all
-    render json: @authors.as_json(only: [:id, :profile])
+    @authors = Author.api_data
+    render json: @authors
   end
 
 end
