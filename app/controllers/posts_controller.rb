@@ -4,10 +4,14 @@ class PostsController < ApplicationController
   def index
     if params["id"]
       timepoint = Post.find(params['id']).updated_time
-      up_or_down = params['behavior'] == 'down' ? '<' : '>'     
+      before_or_after = params['behavior'] == 'down' ? '<' : '>'     
     end
 
-    @posts = Post.get_posts_by_params(params[:categories_ids], params[:per_page], timepoint, up_or_down)
+    @posts = Post.api_data.
+                          category_in(params[:categories_ids]).
+                          posted_at(before_or_after, timepoint).
+                          limit(params[:per_page] || 10)
+
     render json: @posts
   end
 end

@@ -61,30 +61,6 @@ describe Post do
           expect(Post.posted_at( '>', "2014-02-04 11:35:29").last.post_id).to eq "36922302396_10151855388582397"
         end
       end
-
-    end
-
-    context "get_posts_by_params" do
-      it "returns given amount of posts" do
-        expect(Post.get_posts_by_params(categories_ids, 10).count).to eq 10
-      end
-
-      it "returns posts by category" do
-        expect(Post.get_posts_by_params(category2.id).first).to eq post
-      end
-
-      describe "it works altogether" do
-        let(:previous_five) {["36922302396_10151860655437397", 
-          "36922302396_10151856899407397", 
-          "36922302396_10151851262957397", 
-          "36922302396_10151852781652397", 
-          "36922302396_10151854664477397"]}
-
-        it "returns previous five posts from the first category" do
-          expect(Post.get_posts_by_params(category.id, 5, "2014-02-06 19:22:53", '<').pluck(:post_id)).to eq previous_five
-        end
-
-      end
     end
   end
 end

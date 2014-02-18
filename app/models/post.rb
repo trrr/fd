@@ -7,10 +7,6 @@ class Post < ActiveRecord::Base
   belongs_to :author
   validates :author, :message, :updated_time, presence: true
 
-  def self.get_posts_by_params(categories_ids, per_page = 10, time=nil, before_or_after=nil)
-    Post.api_data.category_in(categories_ids).posted_at(before_or_after, time).limit(per_page)
-  end
-
   private
     def set_category
       self.category_id = self.author.category_id

@@ -62,11 +62,11 @@ describe PostsFetcher do
 
   end
 
-  context "integration tests (Hitting the network!)" do
-    it "fetches posts for a given author from facebook and saves them to the db" do
-      pending "uncomment it when needed"
-      # PostsFetcher.fetch_and_save_author_posts(author)
-      # expect(author.posts.count).to be > 10
-    end
-  end
+  # context "integration tests (Hitting the network!)" do
+  #   it "fetches posts for a given author and saves them to the db" do
+  #     pending "this test hits the network"
+  #     PostsFetcher.fetch_and_save_author_posts(author)
+  #     expect(author.posts.count).to be > 10
+  #   end
+  # end
 end
