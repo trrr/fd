@@ -9,6 +9,7 @@ class PostsController < ApplicationController
 
     @posts = Post.api_data.
                           category_in(params[:categories_ids]).
+                          author_in(params[:authors_ids]).
                           posted_at(before_or_after, timepoint).
                           limit(params[:per_page] || 10)
 

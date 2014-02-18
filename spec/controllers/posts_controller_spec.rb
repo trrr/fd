@@ -5,6 +5,9 @@ describe PostsController do
   let(:category) {create :category}
   let(:author) {create :author, category: category}
 
+  let(:category1) {create :category}
+  let(:author1) {create :author, profile: "lg", category: category1}
+
   let(:data) {JSON.parse(File.read("spec/response.json"))}
   let(:posts) {PostsFetcher.serialize_posts(data)}
 
@@ -23,6 +26,18 @@ describe PostsController do
   it "returns posts from a given category" do
     get :index, categories_ids: category.id
     expect(assigns(:posts).map(&:category_id).uniq).to eq [category.id]
+  end
+
+  it "returns posts from a given category" do
+    post = create :post, author: author1, category_id: category1.id
+    get :index, categories_ids: category1.id
+    expect(assigns(:posts)).to eq [post]
+  end
+
+  it "returns posts of a given author" do
+    post = create :post, author: author1, category_id: category1.id
+    get :index, authors_ids: author1.id
+    expect(assigns(:posts)).to eq [post]
   end
 
   it "returns previous ten posts from a given id" do
